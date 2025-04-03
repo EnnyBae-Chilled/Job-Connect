@@ -1,0 +1,87 @@
+/* Navbar.css */
+.navbar {
+    background-color: #0066FF;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    font-family: 'Times New Roman', Times, serif;
+  }
+  
+  .nav-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .logo {
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+    color: white;
+  }
+  
+  .subtext {
+    font-size: 14px;
+    opacity: 0.8;
+  }
+  
+  .nav-links a {
+    margin-right: 15px;
+    text-decoration: none;
+    color: white;
+  }
+  
+  .nav-links a:hover {
+    text-decoration: underline;
+  }
+  
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .help {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+  }
+  
+  .signin {
+    border: 1px solid white;
+    padding: 6px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: white;
+  }
+  
+  .signin:hover {
+    background-color: white;
+    color: #1E3A8A;
+  }
+  
+  .post-job {
+    background-color: blue;
+    color: #1E3A8A;
+    font-weight: bold;
+    padding: 6px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+  }
+  
+  .post-job:hover {
+    background-color: #f3f3f3;
+  }
+  
+  .jobseekers {
+    text-decoration: none;
+    color: white;
+  }
+  
+  .jobseekers:hover {
+    text-decoration: underline;
+  }
+  

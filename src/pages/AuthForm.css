@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap');
+
+.auth-page-container {
+  font-family: 'Montserrat', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #fffbfb;
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-page-form {
+  width: 24rem;
+  padding: 1.5rem;
+  background-color: rgba(63, 47, 152, 0.15);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border-radius: 1rem;
+}
+
+.auth-page-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.auth-page-form-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  
+}
+
+.auth-page-input {
+  font-size: 1rem;
+  font-weight: 200;
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.auth-page-button {
+  width: 50%;
+  align-self: center;
+  background-color: rgba(63, 47, 152, 1);
+  color: white;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.auth-page-button:hover {
+  background-color: rgb(73, 55, 175);
+}
+
+.auth-page-toggle {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.875rem;
+}
+
+.auth-page-toggle-button {
+  color: #3b82f6;
+  text-decoration: underline;
+  margin-left: 0.25rem;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+}
+
+ 
+  .auth-page-input-container {
+    position: relative;
+  }
+  
+  .auth-page-input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    outline: none; 
+  }
+  
+  .auth-page-placeholder {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    font-size: 1rem;
+    color: #6b7280;
+    pointer-events: none;
+    transition: top 0.2s ease-in-out, font-size 0.2s ease-in-out, color 0.2s ease-in-out;
+  }
+  
+  .auth-page-input:focus + .auth-page-placeholder,
+  .auth-page-input:not(:placeholder-shown) + .auth-page-placeholder {
+    top: 0.1rem;
+    font-size: 0.8rem;
+    color: rgba(63, 47, 152, 1);
+  }
+  
+  .auth-page-button, .google-button {
+    width: 100%;
+    padding: 0.75rem; /* Increased padding */
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  
+  .google-button {
+    background-color: #ffffff;
+    margin-top: 1rem;
+    color: #202124;
+    border: 1px solid #dadce0;
+  }
+  
+  .google-button:hover {
+    background-color: #f8f9fa;
+  }
+  
+  
+  .google-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .or {
+    margin-left: 45%;
+    margin-top: 1rem;
+  }
+
+  .pass {
+    font-size: 0.7rem;
+    margin-top: 0.5rem;
+  }
+
+  .eclipse {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    filter: blur(50px);
+    pointer-events: none;
+  }
+  
+  .eclipse.top-left {
+    top: -100px;
+    left: -100px;
+  }
+  
+  .eclipse.bottom-right {
+    bottom: -100px;
+    right: -100px;
+  }
+  

@@ -1,0 +1,101 @@
+.resume-builder-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+    padding: 20px;
+    font-family: 'Montserrat', sans-serif;
+  }
+  h1{
+    font-size: 30px;
+    margin-bottom: 20px;
+    color: #5a2d82;
+    text-align: center;
+    font-weight: 900;
+    /* background-color: #f0f0f0; */
+
+  }
+  .resume-form {
+    width: 800px;
+    padding: 40px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .resume-form h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .input-group {
+    display: flex;
+    flex-direction: column; /* Changed to column direction */
+    margin-bottom: 20px;
+  }
+  
+  .input-group label {
+    width: 100%; /* Label takes full width */
+    padding: 10px 0; /* Adjusted padding */
+    box-sizing: border-box;
+    color: #555;
+    margin-bottom: 5px; /* Added margin */
+  }
+  
+  .input-group input,
+  .resume-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 16px;
+    transition: border-color 0.3s;
+  }
+  
+  .resume-form button {
+    padding: 12px 25px;
+    background-color: #5a2d82;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 10px;
+  }
+
+
+
+/* Style for the "Add another" buttons */
+.add-button {
+  padding: 8px 15px;
+  background-color: #6c757d;
+  color: white;
+  margin: 10px 0;
+  width: auto;
+  align-self: flex-start;
+  margin-right: 20px;
+}
+
+
+.generate-button {
+  padding: 15px 40px;
+  background-color: #5a2d82;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.generate-button:hover {
+  background-color: #4a2570;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}

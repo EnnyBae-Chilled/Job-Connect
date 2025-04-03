@@ -1,0 +1,159 @@
+.job-connect-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .search-header {
+    padding: 20px 0;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .search-header input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+  }
+  
+  .welcome-banner {
+    padding: 20px 0;
+  }
+  
+  .welcome-banner h1 {
+    margin: 0;
+    font-size: 30px;
+    text-align: left;
+  }
+  
+  .job-content {
+    display: flex;
+    gap: 30px;
+    margin-top: 20px;
+  }
+  
+  .job-listings {
+    width: 40%;
+  }
+  
+  .job-details {
+    width: 60%;
+  }
+  
+  .job-card {
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  
+  .job-card:hover, .job-card.active {
+    border-color: #5a2d82;
+    background-color: #f9f5ff;
+  }
+  
+  .job-card h3 {
+    margin: 0 0 5px 0;
+    color: #333;
+  }
+  
+  .company {
+    color: #666;
+    margin: 5px 0;
+  }
+  
+  .location {
+    color: #888;
+    font-size: 14px;
+  }
+  
+  .job-meta {
+    display: flex;
+    gap: 15px;
+    margin: 10px 0;
+    color: #5a2d82;
+    font-weight: 500;
+  }
+  
+  .easy-apply {
+    background: transparent;
+    border: 1px solid #5a2d82;
+    color: #5a2d82;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .post-date {
+    color: #999;
+    font-size: 12px;
+    margin-top: 10px;
+  }
+  
+  .job-details h2 {
+    color: #333;
+    margin-bottom: 5px;
+  }
+  
+  .company-location {
+    color: #666;
+    margin-bottom: 20px;
+  }
+  
+  .job-description {
+    line-height: 1.6;
+    margin-bottom: 30px;
+  }
+  
+  .profile-insights {
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  
+  .profile-insights h3 {
+    margin-top: 0;
+  }
+  
+  .qualification-item {
+    margin: 15px 0;
+  }
+  
+  .qualification-question {
+    margin: 20px 0;
+  }
+  
+  .response-options {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .response-options button {
+    padding: 8px 15px;
+    background: #eee;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .response-options button.active {
+    background: #5a2d82;
+    color: white;
+  }
+  
+  .apply-now {
+    background-color: #5a2d82;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+  }

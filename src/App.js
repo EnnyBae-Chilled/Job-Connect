@@ -1,0 +1,29 @@
+import React from 'react';
+import './App.css';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Landing from "./pages/LandingPage"; // Example landing page
+import AuthForm from "./pages/AuthForm";
+import Location from "../src/pages/Location";
+import Type from "../src/pages/Type";
+import ResumeUpload from './pages/Uploadresume';
+import ResumeBuilder from './pages/Resumebuilder';
+import JobConnect from './pages/JobConnnect';
+
+const App = () => {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="/auth" element={<AuthForm />} />
+        <Route path="/location" element={<Location />} />
+        <Route path="/worktype" element={<Type />} />
+        <Route path="/upload-resume" element={<ResumeUpload />} />
+        <Route path="/resumebuilder" element={<ResumeBuilder />} />
+        <Route path="/jobconnect" element={<JobConnect />} />
+      </Routes>
+    </Router>
+  );
+};
+
+export default App;
+
