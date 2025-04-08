@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './JobConnect.css';
 import { Link } from 'react-router-dom';
+import { FaHome, FaSearchDollar, FaUser, FaHeart, FaComment, FaBriefcase } from 'react-icons/fa';
 
 const JobConnect = () => {
   const [jobs, setJobs] = useState([]);
@@ -32,14 +33,33 @@ const JobConnect = () => {
 
   return (
     <div className="job-connect-container">
-        <nav className="navbar">
+      <nav className="navbar">
         <h1 className="logo">JOBCONNECT</h1>
-        <div className="nav-links">
-          <Link to="/landing">Home</Link>
-          <a href="#">Upload Resume</a>
-          <a href="#">Sign In</a>
+        <div className="nav-right">
+          <div className="user-nav">
+            <Link to="/profile" className="user-nav-item">
+              <FaUser className="user-nav-icon" />
+              <span>Profile</span>
+            </Link>
+            <Link to="/favorites" className="user-nav-item">
+              <FaHeart className="user-nav-icon" />
+              <span>My Favorites</span>
+            </Link>
+            <Link to="/chat" className="user-nav-item">
+              <FaComment className="user-nav-icon" />
+              <span>Chat</span>
+            </Link>
+            <Link to="/myjobs" className="user-nav-item">
+              <FaBriefcase className="user-nav-icon" />
+              <span>My Job</span>
+            </Link>
+          </div>
+          {/* <div className="user-welcome">
+            <span>Welcome, Eniola</span>
+          </div> */}
         </div>
       </nav>
+
 
       {/* Search Header */}
       <div className="search-header">

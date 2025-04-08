@@ -7,9 +7,9 @@ const LandingPage = () => {
   return (
     <div className="container">
       
-      <nav className="navbar">
-        <h1 className="logo">JOBCONNECT</h1>
-        <div className="nav-links">
+      <nav className="navbar1">
+        <h1 className="logo1">JOBCONNECT</h1>
+        <div className="nav-links1">
           <Link to="/landing">Home</Link>
           <a href="#">Upload Resume</a>
           <a href="#">Sign In</a>
