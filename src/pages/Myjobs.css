@@ -1,0 +1,164 @@
+/* MyJobsPage.css */
+.my-jobs-page {
+    padding: 20px;
+    font-family: 'Montserrat', sans-serif;
+    color: #333;
+    max-width: 960px;
+    margin: 20px auto;
+  }
+  
+  .my-jobs-page h2 {
+    color: #5a2d82;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 10px;
+    font-size: 38px;
+    font-weight: 600;
+  }
+  
+  .applied-job-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .applied-job-card h3 {
+    margin-top: 0;
+    color: #333;
+    font-size: 1.2em;
+    margin-bottom: 5px;
+  }
+  
+  .applied-job-card .company {
+    color: #666;
+    font-size: 0.9em;
+    margin-bottom: 5px;
+  }
+  
+  .applied-job-card .location {
+    color: #888;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+  }
+  
+  .applied-job-card .job-meta {
+    display: flex;
+    gap: 15px;
+    font-size: 0.85em;
+    color: #5a2d82;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+  
+  .applied-job-card .view-application-button {
+    background-color: #5a2d82; /* Green color for applied jobs */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+    align-self: flex-start;
+    transition: background-color 0.3s;
+  }
+  
+  .applied-job-card .view-application-button:hover {
+    background-color: #462266;
+  }
+  
+  .applied-job-card .withdraw-button {
+    background-color: #ffc107; /* Yellow/amber for withdraw */
+    color: #333;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8em;
+    align-self: flex-end;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+  }
+  
+  .applied-job-card .withdraw-button:hover {
+    background-color: #e0a800;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .my-jobs-page {
+      padding: 15px;
+    }
+  
+    .applied-job-card {
+      padding: 10px;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .applied-job-card .view-application-button,
+    .applied-job-card .withdraw-button {
+      align-self: stretch;
+      margin-top: 10px;
+    }
+  
+    .applied-job-card .job-meta {
+      flex-direction: column;
+      gap: 5px;
+    }
+  }
+  /* MyJobsPage.css */
+/* ... existing styles ... */
+
+.applied-job-card .job-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    align-items: center; /* Align buttons vertically */
+  }
+  
+  .applied-job-card .get-tips-button {
+    background-color: #5a2d82; /* Blue color for tips button */
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8em;
+    transition: background-color 0.3s;
+  }
+  
+  .applied-job-card .get-tips-button:hover {
+    background-color: #462266;
+  }
+  
+  .applied-job-card .interview-tips {
+    margin-top: 15px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+  }
+  
+  .applied-job-card .interview-tips h4 {
+    color: #5a2d82;
+    margin-top: 0;
+    margin-bottom: 5px;
+  }
+  
+  .applied-job-card .interview-tips ul {
+    padding-left: 20px;
+    margin-bottom: 0;
+  }
+  
+  .applied-job-card .interview-tips li {
+    font-size: 0.9em;
+    color: #444;
+    margin-bottom: 5px;
+  }
+  
+  /* ... rest of your CSS ... */

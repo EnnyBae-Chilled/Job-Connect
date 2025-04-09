@@ -28,6 +28,7 @@ export default function AuthForm() {
     //Implement sign in logic here.
     console.log("Signing In");
     //After successful sign in, you can navigate to another page if needed.
+    navigate("/jobconnect");
   }
 
   const handleSubmit = (e) => {

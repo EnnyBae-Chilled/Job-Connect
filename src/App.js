@@ -8,6 +8,9 @@ import Type from "../src/pages/Type";
 import ResumeUpload from './pages/Uploadresume';
 import ResumeBuilder from './pages/Resumebuilder';
 import JobConnect from './pages/JobConnnect';
+import FavoritesPage from './pages/Favorites';
+import MyJobsPage from './pages/Myjobs';
+
 
 const App = () => {
   return (
@@ -20,6 +23,8 @@ const App = () => {
         <Route path="/upload-resume" element={<ResumeUpload />} />
         <Route path="/resumebuilder" element={<ResumeBuilder />} />
         <Route path="/jobconnect" element={<JobConnect />} />
+        <Route path="/favorites" element={<FavoritesPage />} />
+        <Route path="/myjobs" element={<MyJobsPage />} />
       </Routes>
     </Router>
   );

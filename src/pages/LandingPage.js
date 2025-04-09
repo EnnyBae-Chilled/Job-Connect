@@ -10,9 +10,9 @@ const LandingPage = () => {
       <nav className="navbar1">
         <h1 className="logo1">JOBCONNECT</h1>
         <div className="nav-links1">
-          <Link to="/landing">Home</Link>
-          <a href="#">Upload Resume</a>
-          <a href="#">Sign In</a>
+          <Link to="/">Home</Link>
+          <a href="/upload-resume">Upload Resume</a>
+          <a href="/auth">Sign In</a>
         </div>
       </nav>
 
