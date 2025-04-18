@@ -25,15 +25,24 @@ export default function Type() {
     const updatedTitles = jobTitles.filter((_, i) => i !== index);
     setJobTitles(updatedTitles);
   };
-
+  const handleContinue = () => {
+    const preferences = {
+      jobTitles,
+      jobLevel,
+    };
+    localStorage.setItem("jobPreferences", JSON.stringify(preferences));
+  };
   return (
     <div className="container2">
       <nav className="navbar">
-        <h1 className="logo">JOBCONNECT</h1>
+        <Link to="/" className="logo">
+          JOBCONNECT
+        </Link>
+
         <div className="nav-links">
           <Link to="/landing">Home</Link>
-          <a href="#">Upload Resume</a>
-          <a href="#">Sign In</a>
+          <a href="/upload-resume">Upload Resume</a>
+          <a href="/auth">Sign In</a>
         </div>
       </nav>
       <div className="content2">
@@ -53,8 +62,18 @@ export default function Type() {
                 onChange={(e) => handleJobTitleChange(index, e.target.value)}
                 placeholder="Job Title"
               />
-              <button className="edit-btn" onClick={() => handleJobTitleChange(index, "")}>✏️</button>
-              <button className="delete-btn" onClick={() => handleDeleteJobTitle(index)}>🗑️</button>
+              <button
+                className="edit-btn"
+                onClick={() => handleJobTitleChange(index, "")}
+              >
+                ✏️
+              </button>
+              <button
+                className="delete-btn"
+                onClick={() => handleDeleteJobTitle(index)}
+              >
+                🗑️
+              </button>
             </div>
           ))}
 
@@ -68,7 +87,11 @@ export default function Type() {
         {/* Job Level Selection */}
         <div className="section">
           <p className="question">What job level are you interested in?</p>
-          <select className="input-box" value={jobLevel} onChange={(e) => setJobLevel(e.target.value)}>
+          <select
+            className="input-box"
+            value={jobLevel}
+            onChange={(e) => setJobLevel(e.target.value)}
+          >
             <option value="">Select job level</option>
             <option value="Internship">Internship</option>
             <option value="Full-time">Full-time</option>
@@ -78,7 +101,7 @@ export default function Type() {
 
         {/* Continue Button */}
         <div className="button-container">
-          <button className="continue-button">
+          <button className="continue-button" onClick={handleContinue}>
             <Link to="/upload-resume">Continue</Link>
           </button>
         </div>

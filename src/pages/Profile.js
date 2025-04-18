@@ -1,109 +1,121 @@
-import React, { useContext } from 'react';
-import './ProfilePage.css'; // Create a CSS file for styling
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import "./ProfilePage.css";
+import { useNavigate } from "react-router-dom";
+function ProfilePage() {
+  const [resumeData, setResumeData] = useState(null);
+  const [userDetails, setUserDetails] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
+  const storedUser = JSON.parse(localStorage.getItem("user"));
+  const userId = storedUser?._id;
 
+  //   const history = useHistory(); // For back button functionality
+  const handleContinue = () => {
+    navigate("/jobconnect");
+  };
 
- function ProfilePage() {
-   const { resumeData } = useContext(ResumeContext);
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      try {
+        const response = await axios.post(
+          "http://localhost:5000/api/auth/user-details",
+          { userId }
+        );
+        setUserDetails(response.data.user);
+      } catch (error) {
+        console.error("Error fetching user details:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-   return (
-     <div className="profile-page-container">
-       <h1>Your Profile</h1>
-       <div className="resume-display">
-         {/* Header Section */}
-         <div className="header">
-           <h1>{resumeData.contact.firstName} {resumeData.contact.lastName}</h1>
-           <div className="contact-info">
-             {resumeData.contact.phone} | <a href={`mailto:${resumeData.contact.email}`}>{resumeData.contact.email}</a> |
-             {resumeData.contact.linkedin && <a href={resumeData.contact.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>} |
-             {resumeData.contact.github && <a href={resumeData.contact.github} target="_blank" rel="noopener noreferrer">GitHub</a>}
-             {resumeData.contact.address && `, ${resumeData.contact.address}`}
-             {resumeData.contact.city && `, ${resumeData.contact.city}`}
-             {resumeData.contact.state && `, ${resumeData.contact.state}`}
-             {resumeData.contact.zipCode && ` ${resumeData.contact.zipCode}`}
-           </div>
-         </div>
+    if (userId) {
+      fetchUserDetails();
+    } else {
+      setLoading(false);
+      setError("User not logged in or missing ID.");
+    }
+  }, [userId]);
+  useEffect(() => {
+    const fetchResumeData = async () => {
+      if (userDetails?.resume) {
+        try {
+          const response = await axios.post(
+            "http://localhost:5000/api/resume/extract",
+            {
+              resumePath: userDetails.resume,
+            }
+          );
+          setResumeData(response.data);
+        } catch (err) {
+          console.error("Error extracting resume data:", err);
+          setError("Could not extract resume details.");
+        }
+      }
+    };
 
-         {/* Summary Section */}
-         {resumeData.summary.trim() !== '' && (
-           <div className="section">
-             <h2>SUMMARY</h2>
-             <p className="summary">{resumeData.summary}</p>
-           </div>
-         )}
+    fetchResumeData();
+  }, [userDetails]);
+  if (loading) return <p>Loading...</p>;
+  if (!userDetails) return <p>User not found.</p>;
 
-         {/* Education Section */}
-         {resumeData.education.length > 0 && (
-           <div className="section">
-             <h2>EDUCATION</h2>
-             {resumeData.education.map((edu, index) => (
-               <div key={index} className="education-item">
-                 <div className="degree">{edu.degree} in {edu.major}</div>
-                 <div className="school">{edu.school}</div>
-                 <div className="date-range">{edu.graduationDate}</div>
-                 {edu.gpa && <div>GPA: {edu.gpa}</div>}
-                 {edu.relevantCourses && <div className="relevant-courses">Relevant Courses: {edu.relevantCourses}</div>}
-                 {edu.honorsAwards && <div className="honors-awards">Honors and Awards: {edu.honorsAwards}</div>}
-               </div>
-             ))}
-           </div>
-         )}
+  return (
+    <div className="profile-page-container">
+      {/* Back button */}
+      <button className="back-button" onClick={handleContinue}>
+        &lt; Back
+      </button>
 
-         {/* Experience Section */}
-         {resumeData.experiences.length > 0 && (
-           <div className="section">
-             <h2>EXPERIENCE</h2>
-             {resumeData.experiences.map((exp, index) => (
-               <div key={index} className="experience-item">
-                 <div>
-                   <span className="job-title">{exp.jobTitle}</span>
-                   <span className="date-range">{exp.startDate} - {exp.endDate}</span>
-                 </div>
-                 <div className="company">{exp.company}{exp.location && `, ${exp.location}`}</div>
-                 <div className="description">{exp.description}</div>
-                 {exp.achievements.filter(ach => ach.trim() !== '').length > 0 && (
-                   <ul className="achievements-list">
-                     {exp.achievements.filter(ach => ach.trim() !== '').map((ach, i) => (
-                       <li key={i}>{ach}</li>
-                     ))}
-                   </ul>
-                 )}
-               </div>
-             ))}
-           </div>
-         )}
+      <h1>Your Profile</h1>
+      {resumeData && (
+        <div className="parsed-resume-info">
+          <h3>Extracted Resume Info</h3>
+          <p>
+            <strong>Name:</strong> {resumeData.name || "N/A"}
+          </p>
+          <p>
+            <strong>Email:</strong> {resumeData.email || "N/A"}
+          </p>
+          <p>
+            <strong>Phone:</strong> {resumeData.phone || "N/A"}
+          </p>
+          <p>
+            <strong>Skills:</strong> {(resumeData.skills || []).join(", ")}
+          </p>
+        </div>
+      )}
 
-         {/* Projects Section */}
-         {resumeData.projects.length > 0 && (
-           <div className="section">
-             <h2>PROJECTS</h2>
-             {resumeData.projects.map((project, index) => (
-               <div key={index} className="project-item">
-                 <div className="project-name">{project.projectName}</div>
-                 <div className="project-tech">{project.technologies}</div>
-                 <div className="project-description">{project.description}</div>
-                 <div className="project-links">
-                   {project.liveDemo && <a href={project.liveDemo} target="_blank" rel="noopener noreferrer">Live Demo</a>}
-                   {project.githubRepo && <a href={project.githubRepo} target="_blank" rel="noopener noreferrer">GitHub Repo</a>}
-                 </div>
-               </div>
-             ))}
-           </div>
-         )}
+      <div className="resume-display">
+        {/* HEADER */}
+        <div className="header">
+          <h2>{userDetails.username}</h2>
+          <div className="contact-info">
+            <a href={`mailto:${userDetails.email}`}>{userDetails.email}</a>
+          </div>
+        </div>
 
-         {/* Skills Section */}
-         {resumeData.skills.filter(skill => skill.trim() !== '').length > 0 && (
-           <div className="section">
-             <h2>SKILLS</h2>
-             <div className="skills-list">
-               {resumeData.skills.filter(skill => skill.trim() !== '').map((skill, index) => (
-                 <div key={index} className="skill">{skill}</div>
-               ))}
-             </div>
-           </div>
-         )}
-       </div>
-     </div>
-   );
- }
+        {/* RESUME DOCUMENT */}
+        {userDetails.resume && (
+          <div className="resume-section">
+            <h3>Resume</h3>
+            {userDetails.resume.endsWith(".pdf") ? (
+              <iframe
+                src={`http://localhost:5000/${userDetails.resume}`}
+                title="Resume"
+                width="100%"
+                height="500px"
+                style={{ border: "none" }}
+              />
+            ) : (
+              <p>Resume is not in a supported viewable format.</p>
+            )}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
 
- export default ProfilePage;
+export default ProfilePage;

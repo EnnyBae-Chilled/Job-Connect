@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './ResumeUpload.css';
-import { Link } from 'react-router-dom';
-
-
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./ResumeUpload.css";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
 function ResumeUpload() {
   const [noResume, setNoResume] = useState(false);
   const [resumeFile, setResumeFile] = useState(null);
+  const [showPopup, setShowPopup] = useState(false);
   const navigate = useNavigate();
 
   const handleToggle = () => {
@@ -18,16 +18,44 @@ function ResumeUpload() {
     setResumeFile(event.target.files[0]);
   };
 
-  const handleUpload = () => {
-    if (resumeFile) {
-      console.log('Resume uploaded:', resumeFile.name);
-    } else {
-      alert('Please select a resume file to upload.');
+  const handleUpload = async () => {
+    const stored = localStorage.getItem("user");
+    if (!stored) {
+      alert("Please sign in again.");
+      return;
+    }
+
+    const user = JSON.parse(stored);
+    if (!user._id) {
+      alert("Invalid user data. Please sign in again.");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("resume", resumeFile);
+    formData.append("userId", user._id);
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/resume/upload",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log("Resume uploaded:", response.data);
+      // alert('Resume uploaded successfully!');
+      setShowPopup(true);
+    } catch (error) {
+      console.error("Upload error:", error);
+      alert("Failed to upload resume.");
     }
   };
 
   const handleContinue = () => {
-    navigate('/next-page'); // Replace '/next-page' with the actual route
+    navigate("/jobconnect");
   };
 
   return (
@@ -37,15 +65,30 @@ function ResumeUpload() {
           <div className="vertical-text-container">
             <span className="topic">Upload Your Resume</span>
             <div className="file-upload">
-              <input type="file" id="file" className="hidden-file" onChange={handleFileChange} />
+              <input
+                type="file"
+                id="file"
+                className="hidden-file"
+                onChange={handleFileChange}
+              />
               <label htmlFor="file" className="choose-file">
                 Choose file
               </label>
+              {resumeFile && (
+                <span className="file-name">{resumeFile.name}</span>
+              )}
             </div>
-            <button className="upload-button" onClick={handleUpload}>Upload</button>
+
+            <button className="upload-button" onClick={handleUpload}>
+              Upload
+            </button>
             <div className="toggle-container">
               <label className="fancy-toggle">
-                <input type="checkbox" checked={noResume} onChange={handleToggle} />
+                <input
+                  type="checkbox"
+                  checked={noResume}
+                  onChange={handleToggle}
+                />
                 <span className="fancy-slider"></span>
               </label>
               <span className="toggle-message">I don't have a resume</span>
@@ -55,7 +98,7 @@ function ResumeUpload() {
                 <Link to="/resumebuilder">Create your perfect Resume</Link>
               </button>
             )}
-            {!noResume && ( // Continue button appears only when toggle is NOT clicked
+            {!noResume && (
               <button className="continue-button" onClick={handleContinue}>
                 Continue
               </button>
@@ -63,6 +106,17 @@ function ResumeUpload() {
           </div>
         </div>
       </div>
+      {showPopup && (
+        <div className="popup-overlay">
+          <div className="popup">
+            <h2>Success!</h2>
+            <p>Your resume has been uploaded successfully.</p>
+            <button className="continue-button" onClick={handleContinue}>
+              Continue
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

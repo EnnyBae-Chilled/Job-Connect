@@ -1,100 +1,105 @@
-const express = require('express');
+const express = require("express");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const User = require("../models/Users");
 const router = express.Router();
-const jwt = require('jsonwebtoken');
-const User = require('../models/Users');
-const { body, validationResult } = require('express-validator');
+const mongoose = require("mongoose");
 
-// Enhanced signup with validation
-router.post('/signup', [
-  body('username').isLength({ min: 3 }).withMessage('Username must be at least 3 characters'),
-  body('email').isEmail().withMessage('Invalid email format'),
-  body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters')
-], async (req, res) => {
-  // Validate inputs
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
+router.post("/register", async (req, res) => {
+  const { username, email, password } = req.body;
+
+  if (!username || !email || !password) {
+    return res.status(400).json({ message: "All fields are required" });
+  }
+
+  const userExists = await User.findOne({ username });
+  if (userExists) {
+    return res.status(400).json({ message: "Username is already taken" });
+  }
+
+  const saltRounds = 10;
+
+  const hashedPassword = await bcrypt.hash(password, saltRounds);
+  const newUser = new User({ username, email, password: hashedPassword });
+
+  try {
+    await newUser.save();
+    const userCollectionName = `user_${newUser._id}`;
+    await mongoose.connection.createCollection(userCollectionName);
+
+    res.status(201).json({
+      message: "User registered and collection created successfully",
+      user: {
+        username: newUser.username,
+        email: newUser.email,
+      },
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+// router.post('/api/user-data' , async (req, res) => {
+//     const { userId, data } = req.body;
+
+//     try {
+//       const userCollection = mongoose.connection.collection(`user_${userId}`);
+//       await userCollection.insertOne(data);
+
+//       res.status(201).json({ message: 'Data added successfully' });
+//     } catch (err) {
+//       res.status(500).json({ message: 'Failed to add data' });
+//     }
+//   });
+
+router.post("/user-details", async (req, res) => {
+  const { userId } = req.body;
+
+  if (!userId) {
+    return res.status(400).json({ message: "User ID is required." });
   }
 
   try {
-    const { username, email, password } = req.body;
-    
-    // Check if user exists
-    const existingUser = await User.findOne({ $or: [{ email }, { username }] });
-    if (existingUser) {
-      return res.status(400).json({ error: 'User already exists' });
-    }
+    const user = await User.findById(userId);
+    if (!user) return res.status(404).json({ message: "User not found." });
 
-    // Create and save user
-    const user = new User({ username, email, password });
-    await user.save();
+    const { username, email, resume } = user;
 
-    // Generate JWT
-    const token = jwt.sign(
-      { id: user._id }, 
-      process.env.JWT_SECRET, 
-      { expiresIn: '1h' }
-    );
-
-    res.status(201).json({
-      message: 'Signup successful',
-      token,
-      user: { 
-        id: user._id,
-        username: user.username, 
-        email: user.email 
-      }
+    res.status(200).json({
+      message: "User details fetched successfully.",
+      user: { username, email, resume },
     });
-
   } catch (err) {
-    console.error('Signup error:', err);
-    res.status(500).json({ 
-      error: 'Server error during signup',
-      details: process.env.NODE_ENV === 'development' ? err.message : undefined
-    });
+    console.error("Fetch error:", err);
+    res
+      .status(500)
+      .json({ message: "Server error while fetching user details." });
   }
 });
 
-// Login route
-router.post('/login', async (req, res) => {
+router.post("/login", async (req, res) => {
+  const { email, password } = req.body;
   try {
-    const { email, password } = req.body;
-    
-    // Find user
     const user = await User.findOne({ email });
-    if (!user) {
-      return res.status(401).json({ error: 'Invalid credentials' });
-    }
+    if (!user) return res.status(400).json({ message: "User not found" });
 
-    // Compare passwords
-    const isMatch = await user.comparePassword(password);
-    if (!isMatch) {
-      return res.status(401).json({ error: 'Invalid credentials' });
-    }
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch)
+      return res.status(400).json({ message: "Invalid credentials" });
 
-    // Generate JWT
-    const token = jwt.sign(
-      { id: user._id },
-      process.env.JWT_SECRET,
-      { expiresIn: '1h' }
-    );
-
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "1d",
+    });
     res.json({
-      message: 'Login successful',
       token,
       user: {
-        id: user._id,
         username: user.username,
-        email: user.email
-      }
+        email: user.email,
+        _id: user._id,
+      },
     });
-
   } catch (err) {
-    console.error('Login error:', err);
-    res.status(500).json({ 
-      error: 'Server error during login',
-      details: process.env.NODE_ENV === 'development' ? err.message : undefined
-    });
+    res.status(500).json({ message: "Login failed" });
   }
 });
 

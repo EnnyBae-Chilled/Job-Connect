@@ -1,33 +1,33 @@
-import React, { useState } from 'react';
-import './ResumeBuilder.css';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import "./ResumeBuilder.css";
+import { Link } from "react-router-dom";
 
 function ResumeBuilder() {
   const [contact, setContact] = useState({
-    firstName: '',
-    lastName: '',
-    phone: '',
-    email: '',
-    linkedin: '',
-    address: '',
+    firstName: "",
+    lastName: "",
+    phone: "",
+    email: "",
+    linkedin: "",
+    address: "",
   });
 
   const [education, setEducation] = useState({
-    school: '',
-    degree: '',
-    major: '',
-    graduationDate: '',
-    gpa: '', // Added GPA
+    school: "",
+    degree: "",
+    major: "",
+    graduationDate: "",
+    gpa: "", // Added GPA
   });
 
-  const [skills, setSkills] = useState(['']);
+  const [skills, setSkills] = useState([""]);
   const [experiences, setExperiences] = useState([
     {
-      jobTitle: '',
-      company: '',
-      startDate: '',
-      endDate: '',
-      description: '',
+      jobTitle: "",
+      company: "",
+      startDate: "",
+      endDate: "",
+      description: "",
     },
   ]);
 
@@ -46,7 +46,7 @@ function ResumeBuilder() {
   };
 
   const handleAddSkill = () => {
-    setSkills([...skills, '']);
+    setSkills([...skills, ""]);
   };
 
   const handleExperienceChange = (index, e) => {
@@ -62,20 +62,18 @@ function ResumeBuilder() {
     setExperiences([
       ...experiences,
       {
-        jobTitle: '',
-        company: '',
-        startDate: '',
-        endDate: '',
-        description: '',
+        jobTitle: "",
+        company: "",
+        startDate: "",
+        endDate: "",
+        description: "",
       },
     ]);
   };
 
   const generateResume = () => {
-    // Create a new window for the resume
-    const resumeWindow = window.open('', '_blank');
-    
-    // HTML template with paper-like styling
+    const resumeWindow = window.open("", "_blank");
+
     resumeWindow.document.write(`
       <!DOCTYPE html>
       <html>
@@ -169,7 +167,9 @@ function ResumeBuilder() {
           <div class="section">
             <h2>EDUCATION</h2>
             <div class="education-item">
-              <div class="degree">${education.degree} in ${education.major}</div>
+              <div class="degree">${education.degree} in ${
+      education.major
+    }</div>
               <div class="school">${education.school}</div>
               <div class="date-range">${education.graduationDate}</div>
               <div>GPA: ${education.gpa}</div>
@@ -179,7 +179,9 @@ function ResumeBuilder() {
           <!-- Experience Section -->
           <div class="section">
             <h2>EXPERIENCE</h2>
-            ${experiences.map(exp => `
+            ${experiences
+              .map(
+                (exp) => `
               <div class="experience-item">
                 <div>
                   <span class="job-title">${exp.jobTitle}</span>
@@ -188,28 +190,34 @@ function ResumeBuilder() {
                 <div class="company">${exp.company}</div>
                 <div class="description">${exp.description}</div>
               </div>
-            `).join('')}
+            `
+              )
+              .join("")}
           </div>
           
           <!-- Skills Section -->
           <div class="section">
             <h2>SKILLS</h2>
             <div class="skills-list">
-              ${skills.filter(skill => skill.trim() !== '').map(skill => `
+              ${skills
+                .filter((skill) => skill.trim() !== "")
+                .map(
+                  (skill) => `
                 <div class="skill">${skill}</div>
-              `).join('')}
+              `
+                )
+                .join("")}
             </div>
           </div>
         </div>
       </body>
       </html>
     `);
-    
+
     resumeWindow.document.close();
     resumeWindow.focus();
     resumeWindow.print();
   };
-
 
   return (
     <div>
@@ -219,16 +227,36 @@ function ResumeBuilder() {
           <h2>Contact Information</h2>
           <div className="input-group">
             <label>First Name:</label>
-            <input type="text" name="firstName" value={contact.firstName} onChange={handleContactChange} />
+            <input
+              type="text"
+              name="firstName"
+              value={contact.firstName}
+              onChange={handleContactChange}
+            />
             <label>Last Name:</label>
-            <input type="text" name="lastName" value={contact.lastName} onChange={handleContactChange} />
+            <input
+              type="text"
+              name="lastName"
+              value={contact.lastName}
+              onChange={handleContactChange}
+            />
             <label>Phone Number:</label>
-            <input type="text" name="phone" value={contact.phone} onChange={handleContactChange} />
+            <input
+              type="text"
+              name="phone"
+              value={contact.phone}
+              onChange={handleContactChange}
+            />
           </div>
           <div className="input-group">
             <label>Website (LinkedIn, Personal website, etc):</label>
-            <input type="text" name="linkedin" value={contact.linkedin} onChange={handleContactChange} />
-            <button type="button" onClick={() => console.log('Add another')}>
+            <input
+              type="text"
+              name="linkedin"
+              value={contact.linkedin}
+              onChange={handleContactChange}
+            />
+            <button type="button" onClick={() => console.log("Add another")}>
               Add another
             </button>
           </div>
@@ -236,17 +264,42 @@ function ResumeBuilder() {
           <h2>Education</h2>
           <div className="input-group">
             <label>School:</label>
-            <input type="text" name="school" value={education.school} onChange={handleEducationChange} />
+            <input
+              type="text"
+              name="school"
+              value={education.school}
+              onChange={handleEducationChange}
+            />
             <label>Graduation Date:</label>
-            <input type="date" name="graduationDate" value={education.graduationDate} onChange={handleEducationChange} />
+            <input
+              type="date"
+              name="graduationDate"
+              value={education.graduationDate}
+              onChange={handleEducationChange}
+            />
           </div>
           <div className="input-group">
             <label>Degree:</label>
-            <input type="text" name="degree" value={education.degree} onChange={handleEducationChange} />
+            <input
+              type="text"
+              name="degree"
+              value={education.degree}
+              onChange={handleEducationChange}
+            />
             <label>Major:</label>
-            <input type="text" name="major" value={education.major} onChange={handleEducationChange} />
+            <input
+              type="text"
+              name="major"
+              value={education.major}
+              onChange={handleEducationChange}
+            />
             <label>GPA:</label>
-            <input type="text" name="gpa" value={education.gpa} onChange={handleEducationChange} />
+            <input
+              type="text"
+              name="gpa"
+              value={education.gpa}
+              onChange={handleEducationChange}
+            />
           </div>
 
           <h2>Skills</h2>
@@ -264,30 +317,60 @@ function ResumeBuilder() {
           </button>
 
           <h2>Experiences</h2>
-        {experiences.map((exp, index) => (
-          <div key={index}>
-            <input type="text" name="jobTitle" placeholder="Job Title" value={exp.jobTitle} onChange={(e) => handleExperienceChange(index, e)} />
-            <input type="text" name="company" placeholder="Company" value={exp.company} onChange={(e) => handleExperienceChange(index, e)} />
-            <input type="date" name="startDate" value={exp.startDate} onChange={(e) => handleExperienceChange(index, e)} />
-            <input type="date" name="endDate" value={exp.endDate} onChange={(e) => handleExperienceChange(index, e)} />
-            <textarea name="description" placeholder="Description" value={exp.description} onChange={(e) => handleExperienceChange(index, e)} />
-          </div>
-        ))}
-        <button type="button" onClick={handleAddExperience}>
-          Add another
-        </button>
-        <button type="button" onClick={generateResume} className="generate-button">
-          Generate Resume
-        </button>
-        <button className="cont">
-            <Link to="/jobconnect" className="button-link">Continue</Link>
-        </button>
-
+          {experiences.map((exp, index) => (
+            <div key={index}>
+              <input
+                type="text"
+                name="jobTitle"
+                placeholder="Job Title"
+                value={exp.jobTitle}
+                onChange={(e) => handleExperienceChange(index, e)}
+              />
+              <input
+                type="text"
+                name="company"
+                placeholder="Company"
+                value={exp.company}
+                onChange={(e) => handleExperienceChange(index, e)}
+              />
+              <input
+                type="date"
+                name="startDate"
+                value={exp.startDate}
+                onChange={(e) => handleExperienceChange(index, e)}
+              />
+              <input
+                type="date"
+                name="endDate"
+                value={exp.endDate}
+                onChange={(e) => handleExperienceChange(index, e)}
+              />
+              <textarea
+                name="description"
+                placeholder="Description"
+                value={exp.description}
+                onChange={(e) => handleExperienceChange(index, e)}
+              />
+            </div>
+          ))}
+          <button type="button" onClick={handleAddExperience}>
+            Add another
+          </button>
+          <button
+            type="button"
+            onClick={generateResume}
+            className="generate-button"
+          >
+            Generate Resume
+          </button>
+          <button className="cont">
+            <Link to="/jobconnect" className="button-link">
+              Continue
+            </Link>
+          </button>
+        </div>
       </div>
-
-      
     </div>
-  </div>
   );
 }
 
