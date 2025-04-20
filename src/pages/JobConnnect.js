@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "./JobConnect.css";
 import { Link, useNavigate } from "react-router-dom";
-import { FaUser, FaHeart, FaComment, FaBriefcase } from "react-icons/fa";
+import { FaUser, FaHeart, FaBriefcase } from "react-icons/fa";
 
 const JobConnect = () => {
   const [jobs, setJobs] = useState([]);
   const [filteredJobs, setFilteredJobs] = useState([]);
   const [selectedJob, setSelectedJob] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
-  const [jobLevel, setJobLevel] = useState("");
+  const [jobLevel] = useState("");
   const [favorites, setFavorites] = useState(() => {
     const storedFavorites = localStorage.getItem("favoriteJobs");
     return storedFavorites ? JSON.parse(storedFavorites) : [];
@@ -22,7 +22,7 @@ const JobConnect = () => {
   );
   const [locationFilter, setLocationFilter] = useState("");
   const [companyFilter, setCompanyFilter] = useState("");
-  const navigate = useNavigate();
+
   const appId = "55d71e86"; // Replace with your actual app ID
   const appKey = "f25039c3ae90734556314387fed4c69c"; // Replace with your actual app key
   const [userName, setUserName] = useState("User");
@@ -81,7 +81,7 @@ const JobConnect = () => {
     };
 
     fetchJobs();
-  }, [searchTerm, appId, appKey]);
+  }, [searchTerm, appId, appKey, jobLevel]);
 
   useEffect(() => {
     let filtered = jobs;

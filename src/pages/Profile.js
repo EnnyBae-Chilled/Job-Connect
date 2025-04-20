@@ -6,7 +6,6 @@ function ProfilePage() {
   const [resumeData, setResumeData] = useState(null);
   const [userDetails, setUserDetails] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const navigate = useNavigate();
   const storedUser = JSON.parse(localStorage.getItem("user"));
   const userId = storedUser?._id;

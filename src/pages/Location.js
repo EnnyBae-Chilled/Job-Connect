@@ -16,8 +16,8 @@ export default function LocationPage() {
         <h1 className="logo">JOBCONNECT</h1>
         <div className="nav-links">
           <Link to="/landing">Home</Link>
-          <a href="#">Upload Resume</a>
-          <a href="#">Sign In</a>
+          <a href="/upload-resume">Upload Resume</a>
+          <a href="/auth">Sign In</a>
         </div>
       </nav>
 
@@ -39,8 +39,14 @@ export default function LocationPage() {
             />
           </div>
           <div className="remote-toggle">
-            <label className="fancy-switch"> {/* Use the new class name */}
-              <input type="checkbox" checked={isRemoteWork} onChange={handleToggle} />
+            <label className="fancy-switch">
+              {" "}
+              {/* Use the new class name */}
+              <input
+                type="checkbox"
+                checked={isRemoteWork}
+                onChange={handleToggle}
+              />
               <span className="fancy-slider">
                 {/* <span className="lens"></span> */}
               </span>
@@ -57,6 +63,3 @@ export default function LocationPage() {
     </div>
   );
 }
-
-
-
