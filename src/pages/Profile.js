@@ -6,6 +6,7 @@ function ProfilePage() {
   const [resumeData, setResumeData] = useState(null);
   const [userDetails, setUserDetails] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [setError] = useState(null);
   const navigate = useNavigate();
   const storedUser = JSON.parse(localStorage.getItem("user"));
   const userId = storedUser?._id;
@@ -36,7 +37,7 @@ function ProfilePage() {
       setLoading(false);
       setError("User not logged in or missing ID.");
     }
-  }, [userId]);
+  }, [userId, setError]);
   useEffect(() => {
     const fetchResumeData = async () => {
       if (userDetails?.resume) {
@@ -56,7 +57,7 @@ function ProfilePage() {
     };
 
     fetchResumeData();
-  }, [userDetails]);
+  }, [userDetails, setError]);
   if (loading) return <p>Loading...</p>;
   if (!userDetails) return <p>User not found.</p>;
 

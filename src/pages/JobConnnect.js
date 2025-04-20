@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./JobConnect.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FaUser, FaHeart, FaBriefcase } from "react-icons/fa";
 
 const JobConnect = () => {
