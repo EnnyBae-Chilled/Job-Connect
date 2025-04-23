@@ -22,25 +22,33 @@ app.post("/get-interview-tips", async (req, res) => {
   }
 
   try {
-    // Call the AI API (example with OpenAI's GPT-3)
-    const response = await fetch("https://api.openai.com/v1/completions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer YOUR_OPENAI_API_KEY`,
-      },
-      body: JSON.stringify({
-        model: "text-davinci-003", // Use the appropriate GPT model
-        prompt: `Give me interview tips for a ${jobTitle}`,
-        max_tokens: 200,
-      }),
-    });
+    const response = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyDxzoE3guHO9bruZ0keoOXYFXmPxwXerZs`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          contents: [
+            {
+              parts: [
+                {
+                  text: `Give me interview tips for a ${jobTitle}.`,
+                },
+              ],
+            },
+          ],
+        }),
+      }
+    );
 
     const data = await response.json();
 
-    // Return the AI-generated tips
-    if (data.choices && data.choices[0].text) {
-      const tips = data.choices[0].text
+    // Gemini returns a different structure than OpenAI
+    if (data && data.candidates && data.candidates[0]?.content?.parts) {
+      const rawTips = data.candidates[0].content.parts[0].text;
+      const tips = rawTips
         .split("\n")
         .map((tip) => tip.trim())
         .filter((tip) => tip.length > 0);
@@ -49,7 +57,7 @@ app.post("/get-interview-tips", async (req, res) => {
       return res.status(500).json({ error: "Failed to fetch tips" });
     }
   } catch (error) {
-    console.error("Error fetching tips from AI:", error);
+    console.error("Error fetching tips from Gemini:", error);
     return res.status(500).json({ error: "Failed to fetch tips from AI" });
   }
 });
