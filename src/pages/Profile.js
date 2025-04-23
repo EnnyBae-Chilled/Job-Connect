@@ -6,7 +6,7 @@ function ProfilePage() {
   const [resumeData, setResumeData] = useState(null);
   const [userDetails, setUserDetails] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [setError] = useState(null);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
   const storedUser = JSON.parse(localStorage.getItem("user"));
   const userId = storedUser?._id;
@@ -69,6 +69,7 @@ function ProfilePage() {
       </button>
 
       <h1>Your Profile</h1>
+      {error && <p style={{ color: "red" }}>{error}</p>}
       {resumeData && (
         <div className="parsed-resume-info">
           <h3>Extracted Resume Info</h3>
