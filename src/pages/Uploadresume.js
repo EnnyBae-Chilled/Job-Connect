@@ -37,7 +37,7 @@ function ResumeUpload() {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/resume/upload",
+        "https://job-connect-backend-79di.onrender.com/api/resume/upload",
         formData,
         {
           headers: {

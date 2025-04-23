@@ -48,7 +48,7 @@ export default function AuthForm() {
   const handleCreateAccount = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/auth/register",
+        "https://job-connect-backend-79di.onrender.com/api/auth/register",
         form,
         {
           timeout: 5000,
@@ -79,7 +79,7 @@ export default function AuthForm() {
 
   const handleSignIn = async () => {
     try {
-      const response = await axios.post("http://localhost:5000/api/auth/login", {
+      const response = await axios.post("https://job-connect-backend-79di.onrender.com/api/auth/login", {
         email,
         password,
       });

@@ -20,7 +20,7 @@ function ProfilePage() {
     const fetchUserDetails = async () => {
       try {
         const response = await axios.post(
-          "http://localhost:5000/api/auth/user-details",
+          "https://job-connect-backend-79di.onrender.com/auth/user-details",
           { userId }
         );
         setUserDetails(response.data.user);
@@ -103,7 +103,7 @@ function ProfilePage() {
             <h3>Resume</h3>
             {userDetails.resume.endsWith(".pdf") ? (
               <iframe
-                src={`http://localhost:5000/${userDetails.resume}`}
+                src={`https://job-connect-backend-79di.onrender.com/${userDetails.resume}`}
                 title="Resume"
                 width="100%"
                 height="500px"
