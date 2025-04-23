@@ -20,7 +20,7 @@ function ProfilePage() {
     const fetchUserDetails = async () => {
       try {
         const response = await axios.post(
-          "https://job-connect-backend-79di.onrender.com/auth/user-details",
+          "http://localhost:5000/api/auth/user-details",
           { userId }
         );
         setUserDetails(response.data.user);

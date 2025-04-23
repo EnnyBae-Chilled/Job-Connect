@@ -12,7 +12,7 @@ export default function AuthForm() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false); 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
 
   const form = {
@@ -61,14 +61,15 @@ export default function AuthForm() {
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("user", JSON.stringify(response.data.user));
       setIsSignIn(true);
-        } catch (err) {
+    } catch (err) {
       let message = "Signup failed - server unavailable";
       if (err.code === "ECONNABORTED") {
         message = "Request timeout - server is not responding";
       } else if (err.message === "Network Error") {
         message = "Cannot connect to server - make sure it's running";
       } else if (err.response) {
-        message = err.response.data?.message || `Server error: ${err.response.status}`;
+        message =
+          err.response.data?.message || `Server error: ${err.response.status}`;
       }
 
       setError(message);
@@ -78,15 +79,18 @@ export default function AuthForm() {
 
   const handleSignIn = async () => {
     try {
-      const response = await axios.post("http://18.117.165.46:5000/api/auth/login", {
-        email,
-        password,
-      });
+      const response = await axios.post(
+        "http://18.117.165.46:5000/api/auth/login",
+        {
+          email,
+          password,
+        }
+      );
 
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("user", JSON.stringify(response.data.user));
       setIsLoggedIn(true);
-      navigate("/jobconnect");
+      navigate("/location");
     } catch (err) {
       const message =
         err.response?.data?.message || "Login failed - check credentials";
@@ -101,7 +105,7 @@ export default function AuthForm() {
     setIsLoggedIn(false);
     resetFields();
     setIsSignIn(false);
-    navigate("/"); 
+    navigate("/");
   };
 
   const handleSubmit = async (e) => {
@@ -194,7 +198,9 @@ export default function AuthForm() {
                 <label htmlFor="password" className="auth-page-placeholder">
                   Password
                 </label>
-                <p className="pass">Passwords must be between 8–12 characters</p>
+                <p className="pass">
+                  Passwords must be between 8–12 characters
+                </p>
               </div>
 
               {error && <p className="auth-page-error">{error}</p>}
@@ -227,16 +233,13 @@ export default function AuthForm() {
               </button>
             </p>
 
-            <p className="or">OR</p>
-
-            <button className="google-button" onClick={handleGoogleSignIn}>
+            {/* <button className="google-button" onClick={handleGoogleSignIn}>
               <img src={googleLogo} alt="Google" className="google-icon" />
               Sign in with Google
-            </button>
+            </button> */}
           </>
         )}
       </motion.div>
-      
     </div>
   );
 }
