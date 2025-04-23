@@ -157,7 +157,9 @@ const JobConnect = () => {
   return (
     <div className="job-connect-container">
       <nav className="navbar">
-        <h1 className="logo">JOBCONNECT</h1>
+        <Link to="/" className="logo">
+                  JOBCONNECT
+                </Link>
         <div className="nav-right">
           <div className="user-nav">
             <Link to="/profile" className="user-nav-item">

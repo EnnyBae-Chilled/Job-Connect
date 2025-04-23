@@ -16,7 +16,9 @@ const LandingPage = () => {
   return (
     <div className="container">
       <nav className="navbar1">
-        <h1 className="logo1">JOBCONNECT</h1>
+        <Link to="/" className="logo">
+                  JOBCONNECT
+                </Link>
         <div className="nav-links1">
           <Link to="/landing">Home</Link>
           <a href="/upload-resume">Upload Resume</a>

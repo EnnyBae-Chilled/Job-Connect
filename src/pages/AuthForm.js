@@ -60,9 +60,8 @@ export default function AuthForm() {
 
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("user", JSON.stringify(response.data.user));
-      setIsLoggedIn(true);
-      navigate("/location");
-    } catch (err) {
+      setIsSignIn(true);
+        } catch (err) {
       let message = "Signup failed - server unavailable";
       if (err.code === "ECONNABORTED") {
         message = "Request timeout - server is not responding";

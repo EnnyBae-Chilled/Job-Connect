@@ -61,7 +61,7 @@ router.post("/user-details", async (req, res) => {
 
   try {
     const user = await User.findById(userId);
-    if (!user) return res.status(404).json({ message: "User not found." });
+    if (!user) return res.status(404).json({ message: "We are having a hard time getting your details, try uploading your resumeand signing in again" });
 
     const { username, email, resume } = user;
 
@@ -87,9 +87,10 @@ router.post("/login", async (req, res) => {
     if (!isMatch)
       return res.status(400).json({ message: "Invalid credentials" });
 
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET || 'defaultsecret123', {
       expiresIn: "1d",
     });
+    
     res.json({
       token,
       user: {
