@@ -103,7 +103,7 @@ function ProfilePage() {
             <h3>Resume</h3>
             {userDetails.resume.endsWith(".pdf") ? (
               <iframe
-                src={`https://job-connect-backend-79di.onrender.com/${userDetails.resume}`}
+                src={`http://18.117.165.46:5000/${userDetails.resume}`}
                 title="Resume"
                 width="100%"
                 height="500px"

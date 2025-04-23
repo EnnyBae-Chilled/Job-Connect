@@ -56,7 +56,7 @@ const MyJobsPage = () => {
     if (tips[jobTitle]) return;
 
     try {
-      const response = await fetch("https://job-connect-backend-79di.onrender.com/get-interview-tips", {
+      const response = await fetch("http://18.117.165.46:5000/get-interview-tips", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
