@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Myjobs.css";
 import { useNavigate } from "react-router-dom";
+import https from 'https';
 // const interviewTipsData = {
 //   'Certified Nursing Assistant -CNA': [
 //     "Research common CNA interview questions, such as your experience with patient care and handling emergencies.",
@@ -58,6 +59,7 @@ const MyJobsPage = () => {
     try {
       const response = await fetch("https://18.117.165.46/get-interview-tips", {
         method: "POST",
+        httpsAgent: new https.Agent({ rejectUnauthorized: false }),
         headers: {
           "Content-Type": "application/json",
         },

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "./AuthForm.css";
 // import googleLogo from "../assets/Vector.svg";
 import axios from "axios";
-
+import https from 'https';
 export default function AuthForm() {
   const [isSignIn, setIsSignIn] = useState(false);
   const [fullName, setFullName] = useState("");
@@ -55,6 +55,7 @@ export default function AuthForm() {
           headers: {
             "Content-Type": "application/json",
           },
+          httpsAgent: new https.Agent({ rejectUnauthorized: false }),
         }
       );
 
@@ -84,6 +85,13 @@ export default function AuthForm() {
         {
           email,
           password,
+        },
+        {
+          httpsAgent: new https.Agent({ rejectUnauthorized: false }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+          timeout: 5000,
         }
       );
 

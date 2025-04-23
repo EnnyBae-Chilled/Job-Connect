@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./ResumeUpload.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
-
+import https from 'https';
 function ResumeUpload() {
   const [noResume, setNoResume] = useState(false);
   const [resumeFile, setResumeFile] = useState(null);
@@ -40,6 +40,7 @@ function ResumeUpload() {
         "https://18.117.165.46/api/resume/upload",
         formData,
         {
+          httpsAgent: new https.Agent({ rejectUnauthorized: false }),
           headers: {
             "Content-Type": "multipart/form-data",
           },

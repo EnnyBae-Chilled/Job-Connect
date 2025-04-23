@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./ProfilePage.css";
 import { useNavigate } from "react-router-dom";
+import https from 'https';
 function ProfilePage() {
   const [resumeData, setResumeData] = useState(null);
   const [userDetails, setUserDetails] = useState(null);
@@ -21,7 +22,9 @@ function ProfilePage() {
       try {
         const response = await axios.post(
           "https://18.117.165.46/api/auth/user-details",
-          { userId }
+          { userId },{
+            httpsAgent: new https.Agent({ rejectUnauthorized: false }),
+          }
         );
         setUserDetails(response.data.user);
       } catch (error) {
@@ -46,6 +49,9 @@ function ProfilePage() {
             "https://18.117.165.46/api/resume/extract",
             {
               resumePath: userDetails.resume,
+            }, 
+            {
+              httpsAgent: new https.Agent({ rejectUnauthorized: false }),
             }
           );
           setResumeData(response.data);
