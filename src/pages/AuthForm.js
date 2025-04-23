@@ -48,7 +48,7 @@ export default function AuthForm() {
   const handleCreateAccount = async () => {
     try {
       const response = await axios.post(
-        "http://18.117.165.46:5000/api/auth/register",
+        "https://18.117.165.46/api/auth/register",
         form,
         {
           timeout: 5000,
@@ -80,7 +80,7 @@ export default function AuthForm() {
   const handleSignIn = async () => {
     try {
       const response = await axios.post(
-        "http://18.117.165.46:5000/api/auth/login",
+        "https://18.117.165.46/api/auth/login",
         {
           email,
           password,

@@ -20,7 +20,7 @@ function ProfilePage() {
     const fetchUserDetails = async () => {
       try {
         const response = await axios.post(
-          "http://localhost:5000/api/auth/user-details",
+          "https://18.117.165.46/api/auth/user-details",
           { userId }
         );
         setUserDetails(response.data.user);
@@ -43,7 +43,7 @@ function ProfilePage() {
       if (userDetails?.resume) {
         try {
           const response = await axios.post(
-            "http://localhost:5000/api/resume/extract",
+            "https://18.117.165.46/api/resume/extract",
             {
               resumePath: userDetails.resume,
             }

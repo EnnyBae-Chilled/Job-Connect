@@ -37,7 +37,7 @@ function ResumeUpload() {
 
     try {
       const response = await axios.post(
-        "http://18.117.165.46:5000/api/resume/upload",
+        "https://18.117.165.46/api/resume/upload",
         formData,
         {
           headers: {
