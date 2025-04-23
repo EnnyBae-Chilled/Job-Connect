@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import "./AuthForm.css";
-import googleLogo from "../assets/Vector.svg";
+// import googleLogo from "../assets/Vector.svg";
 import axios from "axios";
 
 export default function AuthForm() {
@@ -129,10 +129,10 @@ export default function AuthForm() {
     setIsSubmitting(false);
   };
 
-  const handleGoogleSignIn = () => {
-    console.log("Signing in with Google");
-    // Hook up Google OAuth here
-  };
+  // const handleGoogleSignIn = () => {
+  //   console.log("Signing in with Google");
+  //   // Hook up Google OAuth here
+  // };
 
   return (
     <div className="auth-page-container">
